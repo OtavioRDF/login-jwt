@@ -24,6 +24,6 @@ const doc = {
 };
 
 const outputFile = path.join(__dirname, '..', 'config/swagger-output.json');
-const endpointsFiles = [path.join(__dirname, './routes.ts')];
+const endpointsFiles = [path.join(__dirname, '/api/routes/routes.ts')];
 
 swaggerAutogen(outputFile, endpointsFiles, doc);

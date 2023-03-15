@@ -25,7 +25,12 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@api/*": ["src/api/*"],
+      "@config/*": ["config/*"],
+      "@routes/*": ["src/api/routes/*"],
+      "@loaders/*": ["src/loaders/*"]
+    }
   },
   "include": [
     "./src/**/*.ts"
