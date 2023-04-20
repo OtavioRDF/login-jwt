@@ -1,9 +1,26 @@
 import { Request, Response } from "express"
-import bcrypt from 'bcrypt';
+import { createUser } from "@services/createUser";
 
 export async function SignUp(req: Request, res: Response){
-    const user = req.body.email;
-    const hashedPassword = await bcrypt.hash(req.body.password, 10)
+  const userEmail = req.body.email;
+  const userPassword = req.body.password;
 
-    res.status(200)
+  if(!userEmail || !userPassword) 
+    res.status(400).send({
+      success: false,
+      message: "Missing email/password fields"
+    });
+  
+  const createUserResponse = await createUser(userEmail, userPassword);
+
+  if(createUserResponse.success)
+    res.status(201).send({
+      success: true,
+      content: createUserResponse.content
+    });
+
+  res.status(500).send({
+    success: false,
+    error: createUserResponse.error
+  });
 }
